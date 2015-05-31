@@ -97,12 +97,15 @@ if !exists(":DiffOrig")
 endif
 
 """""" My changes
+let mapleader=" "
+
 " Indentation
 set tabstop=4       " width
 set softtabstop=4   " number of space deleted
 set shiftwidth=4    " number of spaces inserted
 set expandtab       " spaces instead of tabs
 set nu
+
 let g:loaded_matchparen=1
 
 " Showing whitespace
@@ -110,13 +113,17 @@ let g:loaded_matchparen=1
 set list lcs=eol:¬,trail:·,tab:▸\ 
 "set list lcs=eol:¬
 "set list lcs=eol:¶
+
 " Backups
 set backupdir=~/programmng/vimbackups,.
 set directory=~/programmng/vimbackups,.
 
-" pathogen
+" plugins
 execute pathogen#infect()
 map <silent> <C-n> :NERDTreeFocus<CR>
+nnoremap <Leader>o :CtrlP<Cr>
+
+" ctrl-p
 
 " Invisible character colors 
 highlight NonText guifg=#4a4a59
