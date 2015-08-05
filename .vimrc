@@ -137,3 +137,6 @@ highlight SpecialKey guifg=#4a4a59
 " Relative line numbers
 set relativenumber
 
+" Filetype specific settings
+autocmd FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType make setlocal noexpandtab
