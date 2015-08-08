@@ -100,9 +100,9 @@ endif
 let mapleader=" "
 
 " Indentation
-set tabstop=4       " width
-set softtabstop=4   " number of space deleted
-set shiftwidth=4    " number of spaces inserted
+set tabstop=2       " width
+set softtabstop=2   " number of space deleted
+set shiftwidth=2    " number of spaces inserted
 set expandtab       " spaces instead of tabs
 set nu
 
@@ -122,6 +122,11 @@ set directory=~/programmng/vimbackups,.
 execute pathogen#infect()
 map <silent> <C-n> :NERDTreeFocus<CR>
 nnoremap <Leader>o :CtrlP<Cr>
+nnoremap <Leader>k :!ruby -wc %<Cr>
+
+" NERDTree
+nnoremap <leader>f :NERDTreeFind<cr>
+let NERDTreeQuitOnOpen=1
 
 " ctrl-p
 
