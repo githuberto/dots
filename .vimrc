@@ -100,9 +100,9 @@ endif
 let mapleader=" "
 
 " Indentation
-set tabstop=2       " width
-set softtabstop=2   " number of space deleted
-set shiftwidth=2    " number of spaces inserted
+set tabstop=4       " width
+set softtabstop=4   " number of space deleted
+set shiftwidth=4    " number of spaces inserted
 set expandtab       " spaces instead of tabs
 set nu
 
@@ -115,8 +115,8 @@ set list lcs=eol:¬,trail:·,tab:▸\
 "set list lcs=eol:¶
 
 " Backups
-set backupdir=~/programmng/vimbackups,.
-set directory=~/programmng/vimbackups,.
+set backupdir=~/programming/vimbackups,.
+set directory=~/programming/vimbackups,.
 
 " plugins
 execute pathogen#infect()
@@ -139,5 +139,8 @@ set relativenumber
 
 " Filetype specific settings
 autocmd FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
-autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2
+"autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType make setlocal noexpandtab
+
+" Leader binds
+nnoremap <Leader>p :set paste!<Cr>
