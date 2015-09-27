@@ -144,3 +144,5 @@ autocmd FileType make setlocal noexpandtab
 
 " Leader binds
 nnoremap <Leader>p :set paste!<Cr>
+nnoremap <Leader>m :silent !pandoc -o %.html %<Cr> :redraw! <Cr>
+nnoremap <Leader>r :redraw!<Cr>
