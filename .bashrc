@@ -1,3 +1,4 @@
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -108,15 +109,16 @@ fi
 
 # my definitions
 alias ff='nohup firefox 2> /dev/null &'
-alias adt='nohup /home/rf/adt/eclipse/eclipse 2> /dev/null &'
-alias kepler='nohup /home/rf/extractables/eclipse/eclipse 2> /dev/null &'
-alias cr='~/programming/bash/cr.sh'
-alias android='~/programming/android/android-studio/bin/studio.sh'
 alias vi='vim'
 alias g='g++ -std=c++11 -pedantic'
 alias o='xdg-open'
+alias p3='python3.4'
 
 # autorun tmux
-if [[ ! $TERM =~ screen ]]; then
-    exec tmux
-fi
+#if [[ ! $TERM =~ screen ]]; then
+#    exec tmux
+#fi
+
+# safer rm
+alias rm="rm -I"
+
