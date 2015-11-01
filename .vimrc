@@ -146,3 +146,11 @@ autocmd FileType make setlocal noexpandtab
 nnoremap <Leader>p :set paste!<Cr>
 nnoremap <Leader>m :silent !pandoc -o %.html %<Cr> :redraw! <Cr>
 nnoremap <Leader>r :redraw!<Cr>
+
+" Better tab menu
+set wildmenu
+
+" move by visual lines
+noremap j gj
+noremap k gk
+
