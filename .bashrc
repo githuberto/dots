@@ -107,12 +107,23 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+
+# history
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+
+# Save and reload the history after each command finishes
+#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 # my definitions
 alias ff='nohup firefox 2> /dev/null &'
 alias vi='vim'
 alias g='g++ -std=c++11 -pedantic'
 alias o='xdg-open'
 alias p3='python3.4'
+alias fixnet='sudo service network-manager restart'
 
 # autorun tmux
 #if [[ ! $TERM =~ screen ]]; then
@@ -121,4 +132,7 @@ alias p3='python3.4'
 
 # safer rm
 alias rm="rm -I"
+
+alias copy='xclip -sel clip'
+
 
