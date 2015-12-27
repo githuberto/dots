@@ -144,8 +144,8 @@ autocmd FileType make setlocal noexpandtab
 
 " Leader binds
 nnoremap <Leader>p :set paste!<Cr>
-nnoremap <Leader>m :silent !pandoc -o %.html %<Cr> :redraw! <Cr>
 nnoremap <Leader>r :redraw!<Cr>
+nnoremap <Leader>m :0r ~/templates/competitive.cc<Cr>
 
 " Better tab menu
 set wildmenu
@@ -155,5 +155,18 @@ noremap j gj
 noremap k gk
 
 " Copy/paste between vims
-set clipboard=unnamed
+"set clipboard=unnamed
+
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_compiler_options = "-std=c++11 -pedantic"
+nnoremap <Leader>c :SyntasticCheck<Cr>
+autocmd VimEnter * :SyntasticToggleMode
 
