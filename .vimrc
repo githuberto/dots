@@ -150,7 +150,10 @@ nnoremap <Leader>r :redraw!<Cr>
 " Better tab menu
 set wildmenu
 
-" move by visual lines
+" Move by visual lines
 noremap j gj
 noremap k gk
+
+" Copy/paste between vims
+set clipboard=unnamed
 
