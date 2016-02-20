@@ -146,6 +146,8 @@ autocmd FileType make setlocal noexpandtab
 nnoremap <Leader>p :set paste!<Cr>
 nnoremap <Leader>r :redraw!<Cr>
 nnoremap <Leader>m :0r ~/templates/competitive.cc<Cr>
+vnoremap <Leader>y "+y
+nnoremap <Leader>p "+p
 
 " Better tab menu
 set wildmenu
