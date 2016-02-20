@@ -167,6 +167,7 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = "-std=c++11 -pedantic"
+let g:syntastic_python_python_exec = "/usr/bin/python3.4"
 nnoremap <Leader>c :SyntasticCheck<Cr>
 autocmd VimEnter * :SyntasticToggleMode
 
