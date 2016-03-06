@@ -98,6 +98,7 @@ endif
 
 """""" My changes
 let mapleader=" "
+set mouse=
 
 " Indentation
 set tabstop=4       " width
