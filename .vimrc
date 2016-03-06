@@ -143,11 +143,12 @@ autocmd FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType make setlocal noexpandtab
 
 " Leader binds
-nnoremap <Leader>p :set paste!<Cr>
+nnoremap <Leader>t :set paste!<Cr>
 nnoremap <Leader>r :redraw!<Cr>
 nnoremap <Leader>m :0r ~/templates/competitive.cc<Cr>
 vnoremap <Leader>y "+y
 nnoremap <Leader>p "+p
+vnoremap <Leader>p "+p
 
 " Better tab menu
 set wildmenu
@@ -171,5 +172,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = "-std=c++11 -pedantic"
 let g:syntastic_python_python_exec = "/usr/bin/python3.4"
 nnoremap <Leader>c :SyntasticCheck<Cr>
+nnoremap <Leader>C :SyntasticReset<Cr>
 autocmd VimEnter * :SyntasticToggleMode
 
