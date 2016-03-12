@@ -175,4 +175,14 @@ let g:syntastic_python_python_exec = "/usr/bin/python3.4"
 nnoremap <Leader>c :SyntasticCheck<Cr>
 nnoremap <Leader>C :SyntasticReset<Cr>
 autocmd VimEnter * :SyntasticToggleMode
+ 
+" Toggle line number mode
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
 
+nnoremap <C-n> :call NumberToggle()<cr>
