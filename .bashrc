@@ -125,14 +125,13 @@ alias o='xdg-open'
 alias p3='python3.4'
 alias fixnet='sudo service network-manager restart'
 
-# autorun tmux
-#if [[ ! $TERM =~ screen ]]; then
-#    exec tmux
-#fi
-
 # safer rm
 alias rm="rm -I"
 
 alias copy='xclip -sel clip'
 
+# disable terminal scroll lock
+stty -ixon
 
+# enable vi mode
+set -o vi
