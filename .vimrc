@@ -1,20 +1,3 @@
-
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -23,29 +6,20 @@ set nocompatible
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup      " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+  set backup        " keep a backup file
 endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set ruler           " show the cursor position all the time
+set showcmd         " display incomplete commands
+set incsearch       " do incremental searching
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
-" Don't use Ex mode, use Q for formatting
+" Don't use Ex mode, use Q for word wrapping
 map Q gq
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
 
 " Switch syntax highlighting on, when the terminal hascolors
 " Also switch on highlighting the last used search pattern.
@@ -84,7 +58,7 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
+  set autoindent        " always set autoindenting on
 
 endif " has("autocmd")
 
@@ -96,72 +70,123 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
-"""""" My changes
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""        My changes        """""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""
+
 let mapleader=" "
-set mouse=
 
 " Indentation
-set tabstop=4       " width
+set tabstop=4       " tab width
 set softtabstop=4   " number of space deleted
 set shiftwidth=4    " number of spaces inserted
 set expandtab       " spaces instead of tabs
-set nu
 
 let g:loaded_matchparen=1
 
 " Showing whitespace
-"set list lcs=eol:˒
 set list lcs=eol:¬,trail:·,tab:▸\ 
-"set list lcs=eol:¬
-"set list lcs=eol:¶
-
-" Backups
-set backupdir=~/programming/vimbackups,.
-set directory=~/programming/vimbackups,.
-
-" plugins
-execute pathogen#infect()
-map <silent> <C-n> :NERDTreeFocus<CR>
-nnoremap <Leader>o :CtrlP<Cr>
-nnoremap <Leader>k :!ruby -wc %<Cr>
-
-" NERDTree
-nnoremap <leader>f :NERDTreeFind<cr>
-let NERDTreeQuitOnOpen=1
-
-" ctrl-p
 
 " Invisible character colors 
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
+" Leader binds
+nnoremap <Leader>t :set paste!<Cr>
+nnoremap <Leader>r :redraw!<Cr>
+nnoremap <Leader>m :0r ~/templates/competitive.cc<Cr>
+"vnoremap <Leader>y "+y
+nnoremap <Leader>p "+p
+vnoremap <Leader>p "+p
+
+" Change terminal title
+set title
+
+" Better tab menu
+set wildmenu
+
+" Search case-insensitive if all lowercase
+set ignorecase
+set smartcase
+
+" Clear search highlighting without asdfadf
+nmap <silent> ,/ :nohlsearch<CR>
+
+" Long history
+set history=1000        " command
+set undolevels=1000     " undo
+
+" Move by visual lines
+noremap j gj
+noremap k gk
+ 
 " Relative line numbers
 set relativenumber
+set nu
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<cr>
 
 " Filetype specific settings
 autocmd FileType ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
 "autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType make setlocal noexpandtab
 
-" Leader binds
-nnoremap <Leader>t :set paste!<Cr>
-nnoremap <Leader>r :redraw!<Cr>
-nnoremap <Leader>m :0r ~/templates/competitive.cc<Cr>
-vnoremap <Leader>y "+y
-nnoremap <Leader>p "+p
-vnoremap <Leader>p "+p
+" Quickly edit/reload vimrc
+" let s:dot_path = expand("~/dots/.vimrc")
+" if filereadable(s:dot_path)
+"     let g:vimrc_loc = s:dot_path
+" else
+"     let g:vimrc_loc = $MYVIMRC
+" endif
+" 
+let g:vimrc_loc = $MYVIMRC
 
-" Better tab menu
-set wildmenu
+:execute "nmap <silent> <leader>ev :tabedit" . g:vimrc_loc . "<CR>"
+:execute "nmap <silent> <leader>sv :so" . g:vimrc_loc . "<CR>"
+nmap <silent> <leader>eb :tabedit ~/.bashrc <CR>
+nmap <silent> <leader>et :tabedit ~/.tmux.conf <CR>
 
-" Move by visual lines
-noremap j gj
-noremap k gk
+" timeout length for mapping commands
+set ttimeoutlen=0
 
-" Copy/paste between vims
-"set clipboard=unnamed
+" highlight columns over 80 characters
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%82v', 100) "set column nr
 
-" Syntastic settings
+" scroll with cursor
+nnoremap <C-j> <C-E>j
+nnoremap <C-k> <C-Y>k
+
+" intuitive placement of vim splits
+set splitbelow
+set splitright
+
+" disable folds
+set nofoldenable
+
+"""""""""""""""""""""
+"""""" Plugins """"""
+"""""""""""""""""""""
+execute pathogen#infect()
+
+" NERDTree
+"map <silent> <C-n> :NERDTreeFocus<CR>
+nnoremap <leader>f :NERDTreeFind<cr>
+let NERDTreeQuitOnOpen=1
+
+" ctrl-p
+"nnoremap <Leader>o :CtrlP<Cr>
+
+" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -175,14 +200,10 @@ let g:syntastic_python_python_exec = "/usr/bin/python3.4"
 nnoremap <Leader>c :SyntasticCheck<Cr>
 nnoremap <Leader>C :SyntasticReset<Cr>
 autocmd VimEnter * :SyntasticToggleMode
- 
-" Toggle line number mode
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
 
-nnoremap <C-n> :call NumberToggle()<cr>
+" CommandT settings
+nnoremap <Leader>o :CommandT<Cr>
+let g:CommandTMaxFiles=100000
+let g:CommandTFileScanner = "watchman"
+let g:CommandTWildIgnore = "*.o,*.obj,*~,*.*~"
+let g:CommandTTraverseSCM = "pwd"
