@@ -207,3 +207,5 @@ let g:CommandTMaxFiles=100000
 let g:CommandTFileScanner = "watchman"
 let g:CommandTWildIgnore = "*.o,*.obj,*~,*.*~"
 let g:CommandTTraverseSCM = "pwd"
+
+set mouse=
