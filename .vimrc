@@ -2,8 +2,28 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Vundle stuff
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'rust-lang/rust.vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
+
 
 if has("vms")
   set nobackup      " do not keep a backup file, use versions instead
@@ -176,7 +196,6 @@ set nofoldenable
 """""""""""""""""""""
 """""" Plugins """"""
 """""""""""""""""""""
-execute pathogen#infect()
 
 " NERDTree
 "map <silent> <C-n> :NERDTreeFocus<CR>
