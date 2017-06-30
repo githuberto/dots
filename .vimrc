@@ -2,28 +2,8 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Vundle stuff
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'rust-lang/rust.vim'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-
 
 if has("vms")
   set nobackup      " do not keep a backup file, use versions instead
@@ -192,39 +172,4 @@ set splitright
 
 " disable folds
 set nofoldenable
-
-"""""""""""""""""""""
-"""""" Plugins """"""
-"""""""""""""""""""""
-
-" NERDTree
-"map <silent> <C-n> :NERDTreeFocus<CR>
-nnoremap <leader>f :NERDTreeFind<cr>
-let NERDTreeQuitOnOpen=1
-
-" ctrl-p
-"nnoremap <Leader>o :CtrlP<Cr>
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_compiler_options = "-std=c++11 -pedantic"
-let g:syntastic_python_python_exec = "/usr/bin/python3.4"
-nnoremap <Leader>c :SyntasticCheck<Cr>
-nnoremap <Leader>C :SyntasticReset<Cr>
-autocmd VimEnter * :SyntasticToggleMode
-
-" CommandT settings
-nnoremap <Leader>o :CommandT<Cr>
-let g:CommandTMaxFiles=100000
-let g:CommandTFileScanner = "watchman"
-let g:CommandTWildIgnore = "*.o,*.obj,*~,*.*~"
-let g:CommandTTraverseSCM = "pwd"
-
 set mouse=
