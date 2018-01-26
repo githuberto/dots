@@ -5,6 +5,7 @@ $if mode=vi
 set keymap vi-command
 # these are for vi-command mode
 Control-l: clear-screen
+Control-n: clear-screen
 # approximate the "inner word" object from vim
 "ciw": "lbcw"
 "ciW": "lbcW"
@@ -13,5 +14,5 @@ Control-l: clear-screen
 
 set keymap vi-insert
 # these are for vi-insert mode
-Control-l: clear-screen
+Control-n: clear-screen
 $endif

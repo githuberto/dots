@@ -67,7 +67,7 @@ endif " has("autocmd")
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+        \ | wincmd p | diffthis
 endif
 
 
@@ -79,9 +79,9 @@ endif
 let mapleader=" "
 
 " Indentation
-set tabstop=4       " tab width
-set softtabstop=4   " number of space deleted
-set shiftwidth=4    " number of spaces inserted
+set tabstop=2       " tab width
+set softtabstop=2   " number of space deleted
+set shiftwidth=2    " number of spaces inserted
 set expandtab       " spaces instead of tabs
 
 let g:loaded_matchparen=1
@@ -89,16 +89,17 @@ let g:loaded_matchparen=1
 " Showing whitespace
 set list lcs=eol:¬,trail:·,tab:▸\ 
 
-" Invisible character colors 
+" Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
 " Leader binds
 nnoremap <Leader>t :set paste!<Cr>
-nnoremap <Leader>r :redraw!<Cr>
 nnoremap <Leader>m :0r ~/templates/competitive.cc<Cr>
-"vnoremap <Leader>y "+y
+vnoremap <Leader>y "+y
+nnoremap <Leader>yy "+yy
 nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 
 " Change terminal title
@@ -121,7 +122,10 @@ set undolevels=1000     " undo
 " Move by visual lines
 noremap j gj
 noremap k gk
- 
+
+" Join lines without producing a silly space
+noremap J Jx
+
 " Relative line numbers
 set relativenumber
 set nu
@@ -147,7 +151,7 @@ autocmd FileType make setlocal noexpandtab
 " else
 "     let g:vimrc_loc = $MYVIMRC
 " endif
-" 
+"
 let g:vimrc_loc = $MYVIMRC
 
 :execute "nmap <silent> <leader>ev :tabedit" . g:vimrc_loc . "<CR>"
@@ -155,21 +159,28 @@ let g:vimrc_loc = $MYVIMRC
 nmap <silent> <leader>eb :tabedit ~/.bashrc <CR>
 nmap <silent> <leader>et :tabedit ~/.tmux.conf <CR>
 
-" timeout length for mapping commands
+" Timeout length for mapping commands
 set ttimeoutlen=0
 
-" highlight columns over 80 characters
+" Highlight columns over 80 characters
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%82v', 100) "set column nr
 
-" scroll with cursor
-nnoremap <C-j> <C-E>j
-nnoremap <C-k> <C-Y>k
+" scroll with cursor (disabled for vim-tmux)
+"nnoremap <C-j> <C-E>j
+"nnoremap <C-k> <C-Y>k
 
-" intuitive placement of vim splits
+" Intuitive placement of vim splits
 set splitbelow
 set splitright
 
-" disable folds
+" Disable folds
 set nofoldenable
 set mouse=
+
+" Make the vertical split divider pretty like tmux
+set fillchars+=vert:│
+hi VertSplit cterm=NONE
+
+" Open cpp file
+nnoremap <leader>s :split %:r.cc<cr>

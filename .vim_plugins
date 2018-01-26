@@ -11,10 +11,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'rust-lang/rust.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'junegunn/fzf'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'wikitopian/hardmode'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -28,8 +33,17 @@ filetype plugin indent on    " required
 nnoremap <leader>f :NERDTreeFind<cr>
 let NERDTreeQuitOnOpen=1
 
-" ctrl-p
-"nnoremap <Leader>o :CtrlP<Cr>
+" Ctrl-P
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ --ignore .git5_specs
+      \ --ignore review
+      \ -g ""'
+nnoremap <Leader>o :CtrlP .<Cr>
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -46,9 +60,21 @@ nnoremap <Leader>c :SyntasticCheck<Cr>
 nnoremap <Leader>C :SyntasticReset<Cr>
 autocmd VimEnter * :SyntasticToggleMode
 
-" CommandT settings
-nnoremap <Leader>o :CommandT<Cr>
-let g:CommandTMaxFiles=100000
-let g:CommandTFileScanner = "watchman"
-let g:CommandTWildIgnore = "*.o,*.obj,*~,*.*~"
-let g:CommandTTraverseSCM = "pwd"
+" CommandT settings (disabled)
+"nnoremap <Leader>o :CommandT<Cr>
+"let g:CommandTMaxFiles=100000
+"let g:CommandTFileScanner = "watchman"
+"let g:CommandTWildIgnore = "*.o,*.obj,*~,*.*~"
+"let g:CommandTTraverseSCM = "pwd"
+
+" Airline
+" enable symbols
+let g:airline_powerline_fonts = 1
+" fix symbols
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+" Hardmode
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
