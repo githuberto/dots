@@ -184,3 +184,6 @@ hi VertSplit cterm=NONE
 
 " Open cpp file
 nnoremap <leader>s :split %:r.cc<cr>
+
+" Add Go support
+set rtp+=$GOROOT/misc/vim
