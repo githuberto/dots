@@ -43,7 +43,10 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git5_specs
       \ --ignore review
       \ -g ""'
+" Open Ctrl-P in the working directory.
 nnoremap <Leader>o :CtrlP .<Cr>
+" Open Ctrl-P in the directory of the current file.
+nnoremap <Leader>O :CtrlP<Cr>
 
 " Syntastic
 set statusline+=%#warningmsg#
