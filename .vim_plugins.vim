@@ -38,6 +38,8 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git
       \ --ignore .svn
       \ --ignore .hg
+      \ --ignore "**.swp"
+      \ --ignore "**~"
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
       \ --ignore .git5_specs
@@ -67,7 +69,7 @@ autocmd VimEnter * :SyntasticToggleMode
 "nnoremap <Leader>o :CommandT<Cr>
 "let g:CommandTMaxFiles=100000
 "let g:CommandTFileScanner = "watchman"
-"let g:CommandTWildIgnore = "*.o,*.obj,*~,*.*~"
+"let g:ctrlp_custom_ignore = "*.o,*.obj,*~,*.*~"
 "let g:CommandTTraverseSCM = "pwd"
 
 " Airline
