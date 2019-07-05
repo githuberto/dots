@@ -127,9 +127,6 @@ alias o='xdg-open'
 alias p3='python3'
 alias fixnet='sudo service network-manager restart'
 
-# safer rm
-alias rm="rm -I"
-
 alias copy='xclip -sel clip'
 
 # disable terminal scroll lock
