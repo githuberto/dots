@@ -20,6 +20,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'wikitopian/hardmode'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'fatih/vim-go'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
