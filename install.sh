@@ -44,6 +44,13 @@ install() {
 
   mkdir -p ~/.vim/after/ftplugin/
   add_link python.vim ~/.vim/after/ftplugin/
+
+  mkdir -p ~/.config/rofi/
+  add_link rofi/config ~/.config/rofi/
+  add_link rofi/theme.rasi ~/.config/rofi/
+
+  mkdir -p ~/.config/i3/
+  add_link i3/config ~/.config/i3/
 }
 
 remove() {
@@ -69,6 +76,9 @@ uninstall() {
     exit 1
   fi
 
+  remove  ~/.config/i3/config
+  remove  ~/.config/rofi/theme.rasi
+  remove  ~/.config/rofi/config
   remove ~/.vim/after/ftplugin/python.vim
 
   # Uninstall Vundle. This leaves the plugins though :(
