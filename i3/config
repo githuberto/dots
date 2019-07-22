@@ -85,7 +85,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $workspace1 "1"
-set $workspace4 "4: Discord "
+set $workspace4 "4: Discord"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
