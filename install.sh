@@ -25,6 +25,7 @@ clone_repo() {
 
 install() {
   # Run startup.sh on login.
+  mkdir -p ~/.config/autostart/
   add_link startup.sh.desktop ~/.config/autostart/
 
   add_source .bashrc ~/.bashrc
@@ -70,7 +71,7 @@ uninstall() {
 
   remove ~/.vim/after/ftplugin/python.vim
 
-  # Uninstall Vundle.
+  # Uninstall Vundle. This leaves the plugins though :(
   vim +PluginClean +qall
   remove ~/.vim/bundle/Vundle.vim
 
