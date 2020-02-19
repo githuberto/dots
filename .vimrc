@@ -87,7 +87,7 @@ set expandtab       " spaces instead of tabs
 let g:loaded_matchparen=1
 
 " Showing whitespace
-set list lcs=eol:¬,trail:·,tab:▸\ 
+set list lcs=eol:\ ,trail:·,tab:▸\ 
 
 " Invisible character colors
 highlight NonText guifg=#4a4a59
@@ -111,6 +111,9 @@ set wildmenu
 " Search case-insensitive if all lowercase
 set ignorecase
 set smartcase
+" Disable this when in insert mode so that <C-n> is still sensitive.
+au InsertEnter * set noignorecase
+au InsertLeave * set ignorecase
 
 " Clear search highlighting without asdfadf
 nmap <silent> ,/ :nohlsearch<CR>
@@ -163,8 +166,8 @@ nmap <silent> <leader>et :tabedit ~/.tmux.conf <CR>
 set ttimeoutlen=0
 
 " Highlight columns over 80 characters
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100) "set column nr
+" highlight ColorColumn ctermbg=magenta
+" call matchadd('ColorColumn', '\%82v', 100) "set column nr
 
 " scroll with cursor (disabled for vim-tmux)
 "nnoremap <C-j> <C-E>j

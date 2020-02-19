@@ -47,7 +47,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 " Open Ctrl-P in the working directory.
 nnoremap <Leader>o :CtrlP .<Cr>
 " Open Ctrl-P in the directory of the current file.
-nnoremap <Leader>O :CtrlP<Cr>
+nnoremap <Leader>O :CtrlP %:p:h<Cr>
 
 " Syntastic
 set statusline+=%#warningmsg#
