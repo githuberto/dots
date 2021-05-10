@@ -51,6 +51,9 @@ install() {
 
   mkdir -p ~/.config/i3/
   add_link i3/config ~/.config/i3/
+
+  mkdir -p ~/.config/i3status/
+  add_link i3status/config ~/.config/i3status/
 }
 
 remove() {
@@ -77,6 +80,7 @@ uninstall() {
   fi
 
   remove  ~/.config/i3/config
+  remove  ~/.config/i3status/config
   remove  ~/.config/rofi/theme.rasi
   remove  ~/.config/rofi/config
   remove ~/.vim/after/ftplugin/python.vim
