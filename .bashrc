@@ -13,10 +13,6 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
 PROMPT_COMMAND="history -a"
 
 # check the window size after each command and, if necessary,
@@ -112,8 +108,9 @@ fi
 
 # history
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
+export HISTSIZE=10000000                   # big big history
+export HISTFILESIZE=10000000               # big big history
+export HISTFILE=~/.bash_eternal_history
 shopt -s histappend                      # append to history, don't overwrite it
 
 # Save and reload the history after each command finishes

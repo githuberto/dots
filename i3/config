@@ -87,12 +87,21 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $workspace1 "1"
-set $workspace4 "4: Discord"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+
+set $monitor_one DP-5
+set $monitor_two DP-4
+
+workspace $workspace1 output $monitor_one
+workspace $workspace2 output $monitor_two
+workspace $workspace3 output $monitor_two
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -155,7 +164,13 @@ bar {
         colors {
           background #101010
         }
+        status_command i3status
+        # status_command i3blocks
 }
+
+# bindsym $mod+s [con_mark="scratchpad1"] scratchpad show
+# bindsym $mod+Shift+s mark "scratchpad1", move scratchpad
+
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -175,8 +190,14 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+# Interactive PrintScrn
+bindsym Print exec gnome-screenshot -f ~/sh.png
+bindsym $mod+Print exec gnome-screenshot -f ~/sh.png
+
+
 exec ~/dots/startup.sh
-exec --no-startup-id autorandr -l mobile
+# exec --no-startup-id autorandr -l mobile
+# exec ~/.screenlayout/my_layout.sh
 exec start-pulseaudio-x11
 exec_always compton
 # exec_always feh --bg-scale Pictures/vimix-wallpaper.jpg
