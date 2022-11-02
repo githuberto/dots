@@ -5,11 +5,6 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup      " do not keep a backup file, use versions instead
-else
-  set backup        " keep a backup file
-endif
 set ruler           " show the cursor position all the time
 set showcmd         " display incomplete commands
 set incsearch       " do incremental searching
@@ -71,7 +66,6 @@ if !exists(":DiffOrig")
 endif
 
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""
 """""""""""        My changes        """""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -87,20 +81,32 @@ set expandtab       " spaces instead of tabs
 let g:loaded_matchparen=1
 
 " Showing whitespace
-set list lcs=eol:¬,trail:·,tab:▸\ 
+" set list lcs=eol:¬,trail:·,tab:▸\ 
+set list lcs=trail:·,tab:▸\ 
 
 " Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
 " Leader binds
-nnoremap <Leader>t :set paste!<Cr>
-nnoremap <Leader>m :0r ~/templates/competitive.cc<Cr>
+nnoremap <Leader>t :set paste!<CR>:set paste?<CR>
+
+" Clipboard support
 vnoremap <Leader>y "+y
-nnoremap <Leader>yy "+yy
+nnoremap <Leader>y "+y
+nnoremap <Leader>Y "+Y
+
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
+
+" Show the current registers
+nnoremap <Leader>r :reg<CR>
+
+" Show and clean messages
+nnoremap <Leader>m :messages<CR>
+nnoremap <Leader>cm :messages clear<CR>
 
 " Change terminal title
 set title
@@ -124,7 +130,7 @@ noremap j gj
 noremap k gk
 
 " Join lines without producing a silly space
-noremap J Jx
+" noremap J Jx
 
 " Relative line numbers
 set relativenumber
@@ -164,8 +170,8 @@ nmap <silent> <leader>et :tabedit ~/.tmux.conf <CR>
 set ttimeoutlen=0
 
 " Highlight columns over 80 characters
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100) "set column nr
+" highlight ColorColumn ctermbg=magenta
+" call matchadd('ColorColumn', '\%82v', 100) "set column nr
 
 " scroll with cursor (disabled for vim-tmux)
 "nnoremap <C-j> <C-E>j
@@ -183,8 +189,49 @@ set mouse=
 set fillchars+=vert:│
 hi VertSplit cterm=NONE
 
-" Open cpp file
-nnoremap <leader>s :split %:r.cc<cr>
-
 " Add Go support
 set rtp+=$GOROOT/misc/vim
+
+" WSL Vim starting in replace mode.
+set t_u7=
+
+" Save and load text folding
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent loadview
+
+" Colors
+colorscheme desert
+
+" Status line
+set statusline=hi
+set statusline+=\ %M
+set statusline+=\ %y
+set statusline+=\ %r
+
+" backup and undo history
+set undofile
+set undodir=~/.vim/undodir/,.
+set backupdir=~/.vim/backup//,.,/tmp/
+set directory=~/.vim/backup//,.,/tmp/
+
+" make wrapped lines more obvious
+let &showbreak = "  ↳ "
+
+" show search count message
+set shortmess-=S
+
+" make search highlighting readable
+" hi Search ctermfg=black ctermbg=yellow
+" hi IncSearch ctermfg=black ctermbg=yellow
+
+hi Search guifg=#ff0000 guibg=#00ff00
+
+" Abbreviations
+iabbr dism itx.response.send_message
+iabbr difs itx.followup.send
+iabbr ditx itx: discord.Interaction
+
+" highlight the current line
+" let cursorbg=darkgrey
+hi CursorLine ctermbg=236 cterm=bold
+hi CursorLineNr ctermbg=236 cterm=bold
