@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Dots Startup
+Description=Startup script from github.com/rfaulk/dots.git
+Type=Application
+Exec=bash -c "~/dots/startup.sh"

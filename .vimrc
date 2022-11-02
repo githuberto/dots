@@ -117,6 +117,9 @@ set wildmenu
 " Search case-insensitive if all lowercase
 set ignorecase
 set smartcase
+" Disable this when in insert mode so that <C-n> is still sensitive.
+au InsertEnter * set noignorecase
+au InsertLeave * set ignorecase
 
 " Clear search highlighting without asdfadf
 nmap <silent> ,/ :nohlsearch<CR>
