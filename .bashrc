@@ -14,8 +14,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 PROMPT_COMMAND="history -a"
 
@@ -120,12 +120,8 @@ shopt -s histappend                      # append to history, don't overwrite it
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # my definitions
-alias ff='nohup firefox 2> /dev/null &'
 alias vi='vim'
 alias g='g++ -std=c++11 -pedantic'
-alias o='xdg-open'
-alias p3='python3'
-alias fixnet='sudo service network-manager restart'
 
 alias copy='xclip -sel clip'
 
