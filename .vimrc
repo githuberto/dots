@@ -2,6 +2,15 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" This is only necessary if you use "set termguicolors".
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" fixes glitch? in colors when using vim with tmux
+set background=dark
+set t_Co=256
+set termguicolors
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -37,7 +46,7 @@ if has("autocmd")
   au!
 
   " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+  autocmd FileType text setlocal textwidth=80
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -164,7 +173,7 @@ autocmd FileType make setlocal noexpandtab
 "
 let g:vimrc_loc = $MYVIMRC
 
-:execute "nmap <silent> <leader>ev :tabedit" . g:vimrc_loc . "<CR>"
+:execute "nmap <silent> <leader>ev :e" . g:vimrc_loc . "<CR>"
 :execute "nmap <silent> <leader>sv :so" . g:vimrc_loc . "<CR>"
 nmap <silent> <leader>eb :tabedit ~/.bashrc <CR>
 nmap <silent> <leader>et :tabedit ~/.tmux.conf <CR>
@@ -206,10 +215,10 @@ set t_u7=
 colorscheme desert
 
 " Status line
-set statusline=hi
-set statusline+=\ %M
-set statusline+=\ %y
-set statusline+=\ %r
+" set statusline=%
+" set statusline+=\ %M
+" set statusline+=\ %y
+" set statusline+=\ %r
 
 " backup and undo history
 set undofile
@@ -234,7 +243,19 @@ iabbr dism itx.response.send_message
 iabbr difs itx.followup.send
 iabbr ditx itx: discord.Interaction
 
-" highlight the current line
-" let cursorbg=darkgrey
-hi CursorLine ctermbg=236 cterm=bold
+" Custom colors
+hi CursorLine ctermbg=240 cterm=bold
 hi CursorLineNr ctermbg=236 cterm=bold
+hi NonText guibg=gray20
+hi TabLineFill guibg=gray25 cterm=bold
+hi TabLine guibg=gray30 cterm=bold
+hi SignColumn guibg=gray25
+hi CursorLine guibg=gray23
+hi StatusLine cterm=bold guibg=gray30 guifg=gray90
+hi StatusLineNC cterm=bold guibg=gray30 guifg=gray70
+
+" Open help in a new tab
+nnoremap <Leader>h  :tab help 
+
+" Don't break up long lines.
+set formatoptions-=t
