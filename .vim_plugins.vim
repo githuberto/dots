@@ -12,7 +12,6 @@ Plug 'wikitopian/hardmode'
 " Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'fatih/vim-go'
 Plug 'vim-python/python-syntax'
-" Plugin 'OmniSharp/omnisharp-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
@@ -77,56 +76,7 @@ nnoremap <Leader>O :CtrlP %:p:h<Cr>
 " let g:airline_symbols.space = "\ua0"
 
 " Hardmode
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
-augroup omnisharp_commands
-  autocmd!
-
-  " Show type information automatically when the cursor stops moving.
-  " Note that the type is echoed to the Vim command line, and will overwrite
-  " any other messages in this space including e.g. ALE linting messages.
-  autocmd CursorHold *.cs OmniSharpTypeLookup
-
-  " The following commands are contextual, based on the cursor position.
-  autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssfu <Plug>(omnisharp_find_usages)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssfi <Plug>(omnisharp_find_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>sspd <Plug>(omnisharp_preview_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>sspi <Plug>(omnisharp_preview_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>q <Plug>(omnisharp_type_lookup)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssd <Plug>(omnisharp_documentation)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssfs <Plug>(omnisharp_find_symbol)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssfx <Plug>(omnisharp_fix_usings)
-  autocmd FileType cs nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-  autocmd FileType cs imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-
-  " Navigate up and down by method/property/field
-  autocmd FileType cs nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
-  autocmd FileType cs nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
-  " Find all code errors/warnings for the current solution and populate the quickfix window
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssgcc <Plug>(omnisharp_global_code_check)
-  " Contextual code actions (uses fzf, CtrlP or unite.vim selector when available)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssca <Plug>(omnisharp_code_actions)
-  autocmd FileType cs xmap <silent> <buffer> <Leader>ssca <Plug>(omnisharp_code_actions)
-  " Repeat the last code action performed (does not use a selector)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ss. <Plug>(omnisharp_code_action_repeat)
-  autocmd FileType cs xmap <silent> <buffer> <Leader>ss. <Plug>(omnisharp_code_action_repeat)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ss= <Plug>(omnisharp_code_format)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssnm <Plug>(omnisharp_rename)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssre <Plug>(omnisharp_restart_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ssst <Plug>(omnisharp_start_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>sssp <Plug>(omnisharp_stop_server)
-augroup END
-
-let g:OmniSharp_translate_cygwin_wsl = 1
-
-let g:ale_linters = {
-      \ 'cs': ['OmniSharp'],
-      \}
-let b:ale_linters = ['cs']
+" nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 "Python-Syntax
 let g:python_highlight_all = 1
@@ -135,9 +85,42 @@ let g:python_highlight_all = 1
 set encoding=utf-8
 set updatetime=300
 set signcolumn=yes
+
+" Navigate autocomplete: j/k
 inoremap <silent><expr> <C-j>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Accept autocomplete: tab
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
+
+" Jump to error: gn/gN
+nnoremap gN <CMD>call CocAction('diagnosticPrevious')<CR>zz
+nnoremap gn <CMD>call CocAction('diagnosticNext')<CR>zz
+" nnoremap <Leader>N <CMD>call CocAction('diagnosticPrevious')<CR>zz
+" nnoremap <Leader>n <CMD>call CocAction('diagnosticNext')<CR>zz
+
+" Jump to def: gd
+nmap <silent> gd <Plug>(coc-definition)
+
+" Show hover info: gi
+nmap <silent> gi <CMD>call CocAction('doHover')<CR>
+" nmap <silent> gi <Plug>(coc-implementation)
+
+" Show references: gr
+nmap <silent> gr <Plug>(coc-references)
+
+" Scroll through floating text: Ctrl-f/Ctrl-b
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "<ESC>\<c-r>=coc#float#scroll(1, 1)\<cr>" : "\<Right>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0, 1)\<cr>" : "\<Left>"
+
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
